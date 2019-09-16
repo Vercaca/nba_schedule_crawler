@@ -1,4 +1,4 @@
-# NBA Schedule Bot (UC)
+# NBA Schedule Bot (U/C)
 ## Functions
 - Ask about game schedule
     - by star
@@ -48,7 +48,7 @@
 - Database
     - Sqlite
     
-- Bot 
+- Bot (U/C)
     - IM: Line (pending)
     - Responses: ??
 
