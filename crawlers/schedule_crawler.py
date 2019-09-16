@@ -38,20 +38,20 @@ class BaseBS4Crawler(abc.ABC):
 
 
 class ScheduleCrawler(BaseBS4Crawler):
-    home_page = 'https://stats.nba.com/schedule/#!?Month={}&PD=N'
+    home_page = 'https://stats.nba.com/schedule/#!?Month={month_idx}&PD=N'
 
-    def __init__(self, month, team=None):
+    def __init__(self, month_idx, team=None):
         super().__init__(requester=SeleniumRequester(), parser_feature='html.parser')
         # super().__init__(requester=DemoRequester(), parser_feature='html.parser')
 
-        self._setting(month, team)
+        self._setting(month_idx, team)
 
     def crawl(self):
         self._request(self.home_page)
         return self.soup
 
-    def _setting(self, month, team):
-        self.home_page = self.home_page.format(month)
+    def _setting(self, month_idx, team):
+        self.home_page = self.home_page.format(month_idx=month_idx)
         if team:
             self.home_page += '&TEAM={}'.format(team)
 
