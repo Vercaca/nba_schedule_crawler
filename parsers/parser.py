@@ -1,6 +1,6 @@
 import logging
 
-from web_crawlers.parsers import ParserHelper
+from parsers import ParserHelper
 from entity import ScheduleRow
 
 logger = logging.getLogger(__name__)
