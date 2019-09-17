@@ -11,7 +11,7 @@ from linebot.models import (
 )
 
 
-__LINE_CHANNEL_ACCESS_TOKEN__ = 'Rg7Ts917dOkKpnOqlGTklZrro3dOJ4BOuZro3zAajzp/' \
+__LINE_CHANNEL_ACCESS_TOKEN__ = 'Rg7Ts917dOkKpnOqlGTklZrro3dOpJ4BOuZro3zAajzp/' \
                                 'Z1O+h+dyTpQer6nYfTn1RMEuZ6ya/FpLx8fkvSgTRooY' \
                                 'KwD1rvVQ2oMj1m+fkW6gjv1HnxvZn7pFfMovLdPo1AiY' \
                                 'h4rI+kQqzUyHS6nlwwdB04t89/1O/w1cDnyilFU='  # YOUR_CHANNEL_ACCESS_TOKEN
