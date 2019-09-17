@@ -25,11 +25,21 @@ line_bot_api = LineBotApi(__CHANNEL_ACCESS_TOKEN__)
 handler = WebhookHandler(__CHANNEL_SECRET__)
 
 
+@app.route('/')
+def hello_world():
+    return 'Hello, World!'
+
+
+@app.route('/test')
+def test_page():
+    return 'In test page!'
+
+
 @app.route("/callback", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
     signature = request.headers['X-Line-Signature']
-
+    print(request.authorization)
     # get request body as text
     body = request.get_data(as_text=True)
     app.logger.info("Request body: " + body)
