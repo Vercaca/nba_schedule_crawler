@@ -1,1 +1,1 @@
-web: pipenv run python app.py -p $PORT
+web: pipenv run python app.py -p 5000
