@@ -13,10 +13,7 @@ from linebot.models import (
 )
 
 
-__CHANNEL_ACCESS_TOKEN__ = 'Rg7Ts917dOkKpnOqlGTklZrro3dOpJ4BOuZro3zAajzp/' \
-                                'Z1O+h+dyTpQer6nYfTn1RMEuZ6ya/FpLx8fkvSgTRooY' \
-                                'KwD1rvVQ2oMj1m+fkW6gjv1HnxvZn7pFfMovLdPo1AiY' \
-                                'h4rI+kQqzUyHS6nlwwdB04t89/1O/w1cDnyilFU='  # YOUR_CHANNEL_ACCESS_TOKEN
+__CHANNEL_ACCESS_TOKEN__ = 'mF7WyHTQdEpMQhgFln6+klYO5hrrKngIIg8cl5G8uPHg4b2Rd0tlnH/4ObLk9mSXRMEuZ6ya/FpLx8fkvSgTRooYKwD1rvVQ2oMj1m+fkW52Tno9N1KdWMtWMPaSbi+2bNzTV0SUbP4axaUQyQc0CgdB04t89/1O/w1cDnyilFU='  # YOUR_CHANNEL_ACCESS_TOKEN
 __CHANNEL_SECRET__ = 'fc8aa1a7bfe463c80b0f50de599eec94'  # YOUR_CHANNEL_SECRET
 
 app = Flask(__name__)
