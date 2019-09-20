@@ -13,8 +13,8 @@ from linebot.models import (
 )
 
 
-__CHANNEL_ACCESS_TOKEN__ = 'CHANNEL_ACCESS_TOKEN'  # YOUR_CHANNEL_ACCESS_TOKEN
-__CHANNEL_SECRET__ = 'CHANNEL_SECRET'  # YOUR_CHANNEL_SECRET
+__CHANNEL_ACCESS_TOKEN__ = os.environ.get('CHANNEL_ACCESS_TOKEN', '')  # YOUR_CHANNEL_ACCESS_TOKEN
+__CHANNEL_SECRET__ = os.environ.get('CHANNEL_SECRET', '')  # YOUR_CHANNEL_SECRET
 
 app = Flask(__name__)
 
@@ -53,9 +53,10 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    reply_msg = f'你剛剛說: {event.message.text}'
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=event.message.text))
+        TextSendMessage(text=reply_msg))
 
 
 if __name__ == "__main__":
