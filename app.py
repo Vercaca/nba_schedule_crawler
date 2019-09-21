@@ -13,8 +13,6 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
 )
 
-from models import User
-
 
 __CHANNEL_ACCESS_TOKEN__ = os.environ.get('CHANNEL_ACCESS_TOKEN', None)  # YOUR_CHANNEL_ACCESS_TOKEN
 __CHANNEL_SECRET__ = os.environ.get('CHANNEL_SECRET', None)  # YOUR_CHANNEL_SECRET
@@ -24,6 +22,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', None)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
+from models import add_user
 line_bot_api = LineBotApi(__CHANNEL_ACCESS_TOKEN__)
 handler = WebhookHandler(__CHANNEL_SECRET__)
 
@@ -60,14 +59,12 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    db.session.add(User(reply_token=event.reply_token,
-                        message=event.message.text))
-    db.session.commit()
+    add_user(event.reply_token, event.message)
 
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=event.message.text))
-    print(User.query.all())
+    # print(User.query.all())
     reply_msg = f'你剛剛說 {event.message.text}!'
     line_bot_api.reply_message(
         event.reply_token,

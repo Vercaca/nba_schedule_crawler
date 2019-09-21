@@ -12,3 +12,7 @@ class User(db.Model):
     def __repr__(self):
         return f'<reply msg: {self.reply_token},' \
             f'message: {self.message}>'
+
+def add_user(reply_token, message):
+    db.add(User(reply_token, message))
+    db.session.commit()
