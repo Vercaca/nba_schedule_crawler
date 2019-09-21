@@ -12,6 +12,7 @@ scrapy = "*"
 selenium = "*"
 line-bot-sdk = "*"
 flask = "*"
+flask-sqlalchemy = "*"
 
 [requires]
 python_version = "3.7"
