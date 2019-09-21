@@ -13,12 +13,8 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
 )
 
-from channel_config import channel_config
-__CHANNEL_ACCESS_TOKEN__ = channel_config['ACCESS_TOKEN']
-__CHANNEL_SECRET__ = channel_config['SECRET']
-
-# __CHANNEL_ACCESS_TOKEN__ = os.environ.get('CHANNEL_ACCESS_TOKEN', '')  # YOUR_CHANNEL_ACCESS_TOKEN
-# __CHANNEL_SECRET__ = os.environ.get('CHANNEL_SECRET', '')  # YOUR_CHANNEL_SECRET
+__CHANNEL_ACCESS_TOKEN__ = os.environ.get('CHANNEL_ACCESS_TOKEN', None)  # YOUR_CHANNEL_ACCESS_TOKEN
+__CHANNEL_SECRET__ = os.environ.get('CHANNEL_SECRET', None)  # YOUR_CHANNEL_SECRET
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/vercaca'
