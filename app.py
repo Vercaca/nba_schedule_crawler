@@ -56,6 +56,7 @@ def callback():
 
 
 class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
     reply_token = db.Column(db.String)
     message = db.Column(db.String, nullable=True)
 
