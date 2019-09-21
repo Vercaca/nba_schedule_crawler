@@ -1,6 +1,7 @@
 import os
 
 from flask import Flask, request, abort
+from flask_sqlalchemy import SQLAlchemy
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -17,6 +18,8 @@ __CHANNEL_ACCESS_TOKEN__ = 'CHANNEL_ACCESS_TOKEN'  # YOUR_CHANNEL_ACCESS_TOKEN
 __CHANNEL_SECRET__ = 'CHANNEL_SECRET'  # YOUR_CHANNEL_SECRET
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/vercaca'
+db = SQLAlchemy(app)
 
 line_bot_api = LineBotApi(__CHANNEL_ACCESS_TOKEN__)
 handler = WebhookHandler(__CHANNEL_SECRET__)
@@ -44,6 +47,7 @@ def callback():
     # handle webhook body
     try:
         handler.handle(body, signature)
+
     except InvalidSignatureError:
         print("Invalid signature. Please check your channel access token/channel secret.")
         abort(400)
@@ -51,11 +55,21 @@ def callback():
     return 'OK'
 
 
+class User(db.Model):
+    reply_token = db.Column(db.String)
+    message = db.Column(db.String, nullable=True)
+
+
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    db.session.add(User(reply_token=event.reply_token,
+                        message=event.message.text))
+    db.session.commit()
+
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=event.message.text))
+    print(User.query.all())
 
 
 if __name__ == "__main__":
