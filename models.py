@@ -13,6 +13,3 @@ class User(db.Model):
         return f'<reply msg: {self.reply_token},' \
             f'message: {self.message}>'
 
-def add_user(reply_token, message):
-    db.add(User(reply_token, message))
-    db.session.commit()

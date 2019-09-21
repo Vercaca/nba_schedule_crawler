@@ -22,7 +22,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', None)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-from models import add_user
+from models import User
 line_bot_api = LineBotApi(__CHANNEL_ACCESS_TOKEN__)
 handler = WebhookHandler(__CHANNEL_SECRET__)
 
@@ -55,6 +55,11 @@ def callback():
         abort(400)
 
     return 'OK'
+
+
+def add_user(reply_token, message):
+    db.session.add(User(reply_token, message))
+    db.session.commit()
 
 
 @handler.add(MessageEvent, message=TextMessage)
