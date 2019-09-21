@@ -108,3 +108,4 @@ venv.bak/
 *.db
 chromedriver
 saved/
+channel_config.py
