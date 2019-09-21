@@ -18,8 +18,8 @@ __CHANNEL_SECRET__ = os.environ.get('CHANNEL_SECRET', None)  # YOUR_CHANNEL_SECR
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', None)
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
-db.create_all()
 
 line_bot_api = LineBotApi(__CHANNEL_ACCESS_TOKEN__)
 handler = WebhookHandler(__CHANNEL_SECRET__)
@@ -55,22 +55,14 @@ def callback():
     return 'OK'
 
 
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    reply_token = db.Column(db.String)
-    message = db.Column(db.String, nullable=True)
-
-
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    db.session.add(User(reply_token=event.reply_token,
-                        message=event.message.text))
-    db.session.commit()
+
 
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=event.message.text))
-    print(User.query.all())
+    # print(User.query.all())
     reply_msg = f'你剛剛說 {event.message.text}!'
     line_bot_api.reply_message(
         event.reply_token,
