@@ -13,6 +13,9 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
 )
 
+from models import User
+
+
 __CHANNEL_ACCESS_TOKEN__ = os.environ.get('CHANNEL_ACCESS_TOKEN', None)  # YOUR_CHANNEL_ACCESS_TOKEN
 __CHANNEL_SECRET__ = os.environ.get('CHANNEL_SECRET', None)  # YOUR_CHANNEL_SECRET
 
@@ -57,12 +60,14 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-
+    db.session.add(User(reply_token=event.reply_token,
+                        message=event.message.text))
+    db.session.commit()
 
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=event.message.text))
-    # print(User.query.all())
+    print(User.query.all())
     reply_msg = f'你剛剛說 {event.message.text}!'
     line_bot_api.reply_message(
         event.reply_token,
