@@ -1,7 +1,7 @@
 import os
 
 from flask import Flask, request, abort
-from flask_sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy,
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -19,6 +19,7 @@ __CHANNEL_SECRET__ = os.environ.get('CHANNEL_SECRET', None)  # YOUR_CHANNEL_SECR
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://bmkbedgyimciho:2adc6fdaeededfcdad44bc0c665cf958ec93404cc6c16a9cc9b8f23a084dd0e6@ec2-54-83-201-84.compute-1.amazonaws.com:5432/ddb09rrkbo8a19'
 db = SQLAlchemy(app)
+db.create_all()
 
 line_bot_api = LineBotApi(__CHANNEL_ACCESS_TOKEN__)
 handler = WebhookHandler(__CHANNEL_SECRET__)
@@ -77,5 +78,6 @@ def handle_message(event):
 
 
 if __name__ == "__main__":
+    db.session.
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
