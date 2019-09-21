@@ -1,4 +1,11 @@
-from app import db
+import os
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', None)
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
 
 
 class User(db.Model):
@@ -12,4 +19,9 @@ class User(db.Model):
     def __repr__(self):
         return f'<reply msg: {self.reply_token},' \
             f'message: {self.message}>'
+
+
+def add_user(reply_token, message):
+    db.session.add(User(reply_token, message))
+    db.session.commit()
 

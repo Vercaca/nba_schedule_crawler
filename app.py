@@ -1,7 +1,7 @@
 import os
 
-from flask import Flask, request, abort
-from flask_sqlalchemy import SQLAlchemy
+from flask import request, abort
+# from flask_sqlalchemy import SQLAlchemy
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -17,12 +17,8 @@ from linebot.models import (
 __CHANNEL_ACCESS_TOKEN__ = os.environ.get('CHANNEL_ACCESS_TOKEN', None)  # YOUR_CHANNEL_ACCESS_TOKEN
 __CHANNEL_SECRET__ = os.environ.get('CHANNEL_SECRET', None)  # YOUR_CHANNEL_SECRET
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', None)
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
 
-from models import User
+from models import *
 line_bot_api = LineBotApi(__CHANNEL_ACCESS_TOKEN__)
 handler = WebhookHandler(__CHANNEL_SECRET__)
 
@@ -55,11 +51,6 @@ def callback():
         abort(400)
 
     return 'OK'
-
-
-def add_user(reply_token, message):
-    db.session.add(User(reply_token, message))
-    db.session.commit()
 
 
 @handler.add(MessageEvent, message=TextMessage)
