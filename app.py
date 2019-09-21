@@ -17,7 +17,7 @@ __CHANNEL_ACCESS_TOKEN__ = os.environ.get('CHANNEL_ACCESS_TOKEN', None)  # YOUR_
 __CHANNEL_SECRET__ = os.environ.get('CHANNEL_SECRET', None)  # YOUR_CHANNEL_SECRET
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://bmkbedgyimciho:2adc6fdaeededfcdad44bc0c665cf958ec93404cc6c16a9cc9b8f23a084dd0e6@ec2-54-83-201-84.compute-1.amazonaws.com:5432/ddb09rrkbo8a19'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', None)
 db = SQLAlchemy(app)
 db.create_all()
 
