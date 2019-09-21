@@ -17,7 +17,7 @@ __CHANNEL_ACCESS_TOKEN__ = os.environ.get('CHANNEL_ACCESS_TOKEN', None)  # YOUR_
 __CHANNEL_SECRET__ = os.environ.get('CHANNEL_SECRET', None)  # YOUR_CHANNEL_SECRET
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/vercaca'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://0.0.0.0:5000/vercaca'
 db = SQLAlchemy(app)
 
 line_bot_api = LineBotApi(__CHANNEL_ACCESS_TOKEN__)
