@@ -55,7 +55,7 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    add_user(event.reply_token, event.message)
+    add_user(event.reply_token, event.message.text)
 
     line_bot_api.reply_message(
         event.reply_token,
