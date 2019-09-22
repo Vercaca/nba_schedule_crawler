@@ -13,7 +13,7 @@ class User(db.Model):
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)
-    reply_token = db.Column(db.String, nullable=True)
+    reply_token = db.Column(db.String, nullable=False)
     message = db.Column(db.String, nullable=True)
 
     def __repr__(self):
