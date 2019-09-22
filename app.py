@@ -21,8 +21,6 @@ from models import *
 line_bot_api = LineBotApi(__CHANNEL_ACCESS_TOKEN__)
 handler = WebhookHandler(__CHANNEL_SECRET__)
 
-import json
-
 
 @app.route('/')
 def hello_world():
