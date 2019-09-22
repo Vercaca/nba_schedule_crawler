@@ -1,7 +1,6 @@
 import os
 
 from flask import request, abort
-# from flask_sqlalchemy import SQLAlchemy
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -22,6 +21,8 @@ from models import *
 line_bot_api = LineBotApi(__CHANNEL_ACCESS_TOKEN__)
 handler = WebhookHandler(__CHANNEL_SECRET__)
 
+import json
+
 
 @app.route('/')
 def hello_world():
@@ -40,6 +41,8 @@ def callback():
     print(request.authorization)
     # get request body as text
     body = request.get_data(as_text=True)
+    # body_json = json.loads(body)
+    # body_json['']
     app.logger.info("Request body: " + body)
 
     # handle webhook body
@@ -55,11 +58,8 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    add_user(event.reply_token, event.message.text)
+    add_user(event.source.user.user_id, event.reply_token, event.message.type, event.message.text)
 
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=event.message.text))
     # print(User.query.all())
     reply_msg = f'你剛剛說 {event.message.text}!'
     line_bot_api.reply_message(
