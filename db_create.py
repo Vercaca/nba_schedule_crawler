@@ -1,4 +1,4 @@
-from models import db
+from bot.db import db
 from models import User
 
 # create all
