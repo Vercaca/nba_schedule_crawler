@@ -14,7 +14,11 @@ class User(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     reply_token = db.Column(db.String, nullable=False)
-    message = db.Column(db.String, nullable=True)
+    message = db.Column(db.String, nullable=False)
+
+    def __init__(self, reply_token, message):
+        self.reply_token = reply_token
+        self.message = message
 
     def __repr__(self):
         return f'<reply msg: {self.reply_token},' \
