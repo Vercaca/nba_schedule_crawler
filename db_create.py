@@ -1,12 +1,12 @@
 from bot.db import db
-from models import User
+from models import UserMessage
 
 # create all
 db.create_all()
 
 # insert data
-db.session.add(User(reply_token="token_1",
-                    message="hey"))
+db.session.add(UserMessage(id_='test_id', type='text', user_token="token_1",
+               text="hey"))
 
 # commit the changes
 db.session.commit()
