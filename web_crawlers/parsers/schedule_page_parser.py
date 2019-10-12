@@ -1,6 +1,6 @@
 import logging
 
-from parsers import ParserHelper
+from web_crawlers.parsers import ParserHelper
 from entity import ScheduleRow
 
 logger = logging.getLogger(__name__)
@@ -27,10 +27,10 @@ class SchedulePageParser(ParserHelper):
         # print(len(date_sections))
         for date_section in date_sections:
             date_text = date_section['data-game-day']
-            date_acticles = date_section.find_all('article')
-            for acticle in date_acticles:
-                game_id = acticle['id']
-                article = acticle.find('div', class_=CLS_SCHEDULE_GAME_CONTENT)
+            date_articles = date_section.find_all('article')
+            for article in date_articles:
+                game_id = article['id']
+                article = article.find('div', class_=CLS_SCHEDULE_GAME_CONTENT)
                 game_status = article.find('div', class_=CLS_SCHEDULE_GAME_STATUS)
 
                 game_time = game_status.find_all('span')[0].text

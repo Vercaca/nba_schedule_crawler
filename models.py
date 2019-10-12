@@ -10,8 +10,7 @@ db.init_app(app)
 
 class UserMessage(db.Model):
 
-    __tablename__ = "" \
-                    "user_messages"
+    __tablename__ = "user_messages"
 
     id = db.Column(db.String, primary_key=True, autoincrement=False)
     user_token = db.Column(db.String, nullable=False)

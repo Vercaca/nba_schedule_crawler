@@ -1,8 +1,6 @@
 import time
 
-from crawlers.schedule_crawler import ScheduleCrawler
-
-from parsers.parser import SchedulePageParser
+from web_crawlers import ScheduleCrawler, SchedulePageParser
 from db.schedule_db_helper import demo_restart, insert_schedules_to_db
 
 
