@@ -56,7 +56,7 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    add_user(event.source.user_id, event.reply_token, event.message.type, event.message.text)
+    # add_user(event.source.user_id, event.reply_token, event.message.type, event.message.text)
 
     # print(User.query.all())
     reply_msg = f'你剛剛說 {event.message.text}!'
