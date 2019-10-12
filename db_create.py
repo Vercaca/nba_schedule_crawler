@@ -15,7 +15,8 @@ db = SQLAlchemy(app)
 db.create_all()
 
 # insert data
-db.session.add(UserMessage('id', 'user token', 'type', 'text'))
+db.session.add(UserMessage(id_='test_id', type='text', user_token="token_1",
+               text="hey"))
 
 #
 # commit the changes
